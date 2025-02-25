@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang>
+<head>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator">
+            <div class="display">
+                <div class="previous-operation" id="previousOp"></div>
+                <div class="current-value" id="display">0</div>
+            </div>
+
+            <div class="buttons">
+                <button onclick="handleClear()">C</button>
+                <button onclick="handleDelete()">⌫</button>
+                <button class="operation-button" onclick="handleOperator('÷')">÷</button>
+                <button class="operation-button" onclick="handleOperator('×')">×</button>
+
+                <button onclick="handleNumber('7')">7</button>
+                <button onclick="handleNumber('8')">8</button>
+                <button onclick="handleNumber('9')">9</button>
+                <button class="operation-button" onclick="handleOperator('-')">-</button>
+
+                <button onclick="handleNumber('4')">4</button>
+                <button onclick="handleNumber('5')">5</button>
+                <button onclick="handleNumber('6')">6</button>
+                <button class="operation-button" onclick="handleOperator('+')">+</button>
+
+                <button onclick="handleNumber('1')">1</button>
+                <button onclick="handleNumber('2')">2</button>
+                <button onclick="handleNumber('3')">3</button>
+                <button class="equals-button" onclick="handleEquals()">=</button>
+
+                <button class="zero-button" onclick="handleNumber('0')">0</button>
+                <button onclick="handleDecimal()">.</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #ececec;
+    }
+    
+    .calculator-container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+    
+    .calculator {
+        background: linear-gradient(135deg, #9b87f5, #7E69AB);
+        padding: 2rem;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        min-width: 320px;
+    }
+    
+    .display {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        padding: 1.5rem;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+        text-align: right;
+    }
+    
+    .previous-operation {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.875rem;
+        height: 1.5rem;
+        font-weight: 300;
+    }
+    
+    .current-value {
+        color: white;
+        font-size: 2rem;
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+    
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+    }
+    
+    button {
+        width: 100%;
+        padding: 1rem;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.125rem;
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .operation-button {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .equals-button {
+        background: #6E59A5;
+        grid-row: span 2;
+    }
+    
+    .equals-button:hover {
+        background: #5D4A94;
+    }
+    
+    .zero-button {
+        grid-column: span 2;
+    }
+</style>
+<script>
+    let display = document.getElementById("display");
+let previousOp = document.getElementById("previousOp");
+
+let currentValue = "0";
+let firstNum = null;
+let operator = null;
+let newNumber = true;
+
+function handleNumber(num) {
+    if (newNumber) {
+        currentValue = num;
+        newNumber = false;
+    } else {
+        currentValue = currentValue === "0" ? num : currentValue + num;
+    }
+    updateDisplay();
+}
+
+function handleDecimal() {
+    if (newNumber) {
+        currentValue = "0.";
+        newNumber = false;
+    } else if (!currentValue.includes(".")) {
+        currentValue += ".";
+    }
+    updateDisplay();
+}
+
+function handleOperator(op) {
+    let current = parseFloat(currentValue);
+    
+    if (firstNum === null) {
+        firstNum = current;
+    } else if (operator && !newNumber) {
+        firstNum = calculate(firstNum, current, operator);
+        currentValue = firstNum.toString();
+    }
+
+    newNumber = true;
+    operator = op;
+    previousOp.innerText = `${firstNum} ${op}`;
+    updateDisplay();
+}
+
+function calculate(first, second, op) {
+    switch (op) {
+        case "+": return first + second;
+        case "-": return first - second;
+        case "×": return first * second;
+        case "÷": return second === 0 ? 0 : first / second;
+        default: return second;
+    }
+}
+
+function handleEquals() {
+    if (operator === null || firstNum === null || newNumber) return;
+
+    let secondNum = parseFloat(currentValue);
+    let result = calculate(firstNum, secondNum, operator);
+    
+    currentValue = result.toString();
+    previousOp.innerText = "";
+    firstNum = null;
+    operator = null;
+    newNumber = true;
+    updateDisplay();
+}
+
+function handleClear() {
+    currentValue = "0";
+    previousOp.innerText = "";
+    firstNum = null;
+    operator = null;
+    newNumber = true;
+    updateDisplay();
+}
+
+function handleDelete() {
+    if (!newNumber && currentValue !== "0") {
+        if (currentValue.length === 1) {
+            currentValue = "0";
+            newNumber = true;
+        } else {
+            currentValue = currentValue.slice(0, -1);
+        }
+    }
+    updateDisplay();
+}
+
+function updateDisplay() {
+    display.innerText = currentValue;
+}
+</script>
+
+</body>
+</html>

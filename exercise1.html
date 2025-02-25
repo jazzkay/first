@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>E-Healthcare Advisor</title>
+    <style>
+        body {
+            font-family: 'arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fc;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2d3e50;
+        }
+
+        .logo span {
+            color: #4c9aff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #2d3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #4c9aff;
+        }
+
+        .btn-primary {
+            background: #4c9aff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #377ec8;
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 2px solid #4c9aff;
+            color: #4c9aff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #4c9aff;
+            color: white;
+        }
+
+       
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px;
+        }
+
+        .hero-text {
+            max-width: 50%;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin: 10px 0;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .hero-image img {
+            width: 400px;
+            border-radius: 50%;
+        }
+
+      
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 50px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 300px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+        }
+
+        .service-card p {
+            font-size: 16px;
+            color: #4a4949;
+        }
+
+        .service-card a {
+            text-decoration: none;
+            color: #4c9aff;
+            font-weight: 600;
+        }
+
+        .service-card a:hover {
+            text-decoration: underline;
+        }
+
+        #symptom-checker {
+            text-align: center;
+            padding: 50px;
+            background: #eef2f7;
+        }
+
+        #symptom-checker input {
+            padding: 10px;
+            width: 250px;
+            border: 2px solid #4c9aff;
+            border-radius: 25px;
+            margin-right: 10px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: 500;
+            color: #2d3e50;
+        }
+
+      
+        #appointments {
+            text-align: center;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">be <span>healthy</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#symptom-checker">Symptom Checker</a></li>
+                <li><a href="#appointments">Appointments</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+    <section id="home" class="hero">
+        <div class="hero-text">
+            <h3>WELCOME TO OUR CLINIC SITE</h3>
+            <h1>Make an appointment</h1>
+            <p>Get expert health advice, book consultations, and check symptoms online.</p>
+            <div class="buttons">
+                <button class="btn-primary">Contact Us</button>
+                <button class="btn-secondary">Read More</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="C:\Users\91817\Downloads\doctor.png" alt="Doctor">
+        </div>
+    </section>
+
+   
+    <section id="symptom-checker">
+        <h2>Symptom Checker</h2>
+        <p>Enter your symptoms and get possible causes.</p>
+        <input type="text" id="symptom" placeholder="Enter your symptoms">
+        <button class="btn-primary" onclick="checkSymptoms()">Check</button>
+        <p id="result"></p>
+    </section>
+
+    <section class="services">
+        <div class="service-card">
+            <h3>Online Appointment</h3>
+            <p>Book a consultation with a doctor anytime, anywhere.</p>
+            <a href="#">Make an appointment →</a>
+        </div>
+        <div class="service-card">
+            <h3>Emergency Case</h3>
+            <p>Call now for immediate medical assistance.</p>
+            <a href="#">+91 2345678910
+
+
+            </a>
+        </div>
+        <div class="service-card">
+            <h3>Our Doctors</h3>
+            <p>Meet our expert medical professionals.</p>
+            <a href="#">Doctors </a>
+        </div>
+    </section>
+    <section id="appointments">
+        <h2>Book an Appointment</h2>
+        <p>Schedule a consultation with a doctor.</p>
+        <button class="btn-primary" onclick="alert('Appointment booked successfully!')">Book Now</button>
+    </section>   
+
+    <script>
+        function checkSymptoms() {
+            let symptom = document.getElementById("symptom").value.toLowerCase().trim();
+            let result = "";
+
+            if (!symptom) {
+                result = "Please enter your symptoms.";
+            } else if (/fever|headache|joint pain|rash|vomiting|bleeding|nosebleed|gum bleeding/.test(symptom)) {
+                result = "Possible causes: Dengue, Flu, Cold. If you experience high fever, severe headache, joint pain, or rash, consult a doctor immediately.";
+            } else if (/chest pain|shortness of breath|nausea|dizziness|cold sweat|fatigue|pain in arm|jaw pain|back pain/.test(symptom)) {
+                result = "Possible causes: Heart attack. If you experience chest pain, shortness of breath, nausea, or dizziness, seek emergency medical attention immediately.";
+            } else if (/fever|chills|sweating|headache|muscle pain|nausea|vomiting|fatigue/.test(symptom)) {
+                result = "Possible causes: Malaria. If you experience recurring fever, chills, sweating, or severe headache, consult a doctor immediately.";
+            } else if (/facial pain|headache|nasal congestion|runny nose|postnasal drip|cough|fever|fatigue|bad breath/.test(symptom)) {
+                result = "Possible causes: Sinusitis. If you experience facial pain, headache, nasal congestion, or persistent cough, consider consulting a doctor.";
+            } else if (/rectal pain|bleeding|itching|swelling|discomfort|lump near anus|mucus discharge|pain during bowel movements/.test(symptom)) {
+                result = "Possible causes: Piles (Hemorrhoids). If you experience rectal pain, bleeding, itching, or swelling, consult a doctor for proper evaluation and treatment.";
+            } else if (/bloating|belching|acid reflux|heartburn|nausea|stomach pain|indigestion|loss of appetite/.test(symptom)) {
+                result = "Possible causes: Gastric issues (Acidity, Indigestion, Gas). If you experience persistent stomach pain, bloating, or acid reflux, consider dietary changes and consult a doctor"
+            } else {
+                result = "Symptom not recognized. Consult a doctor for a proper diagnosis.";
+            }
+
+            document.getElementById("result").innerText = result;
+        }
+    </script>
+</body>
+</html>
